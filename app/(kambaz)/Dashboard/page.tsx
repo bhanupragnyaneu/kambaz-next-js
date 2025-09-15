@@ -30,7 +30,7 @@ export default function Dashboard() {
         </div>
         <div className="wd-dashboard-course">
           <Link href="/Courses/9101" className="wd-dashboard-course-link">
-            <Image src="/file.svg" width={200} alt="course logo" height={150} alt="Database Systems" />
+            <Image src="/file.svg" width={200} height={150} alt="Database Systems" />
             <div>
               <h5>CS9101 Database Systems</h5>
               <p className="wd-dashboard-course-title">SQL and NoSQL databases</p>
