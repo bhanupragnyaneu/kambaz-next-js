@@ -10,5 +10,6 @@ export default function KambazNavigation() {
       <Link href="/Inbox" id="wd-inbox-link">Inbox</Link><br/>
       <Link href="/Labs" id="wd-labs-link">Labs</Link><br/>
     </div>
+    
 );}
 

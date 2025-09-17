@@ -11,7 +11,7 @@ export default function Lab1() {
         </div>
         <div id="wd-p-tag">
             <h4>Paragraph Tag</h4>
-            <p id="wd-p-1"> ... </p>
+            <p id="wd-p-1"> This is a paragraph. We often separate a long set of sentences with vertical spaces to make the text easier to read. Browsers ignore vertical white spaces and render all the text as one single set of sentences. To force the browser to add vertical spacing, wrap the paragraphs you want to separate with the paragraph tag </p>
             <p id="wd-p-2"> This is the first paragraph. The paragraph tag is used to format vertical gaps between long pieces of text like this one.</p>
             <p id="wd-p-3"> This is the second paragraph. Even though there is a deliberate white gap between the paragraph above and this paragraph, by default browsers render them as one contiguous piece of text as shown here on the right.</p>
             <p id="wd-p-4"> This is the third paragraph. Wrap each paragraph with the paragraph tag to tell browsers to render the gaps.</p>
@@ -48,7 +48,7 @@ export default function Lab1() {
                 </ul>
                 Your favorite books (in no particular order)
                 <ul id="wd-your-books">
-                    <li>The Hitchhikers Guide to the Galaxy</li>
+                    <li>The Hitchhiker&apos;s Guide to the Galaxy</li>
                     <li>Neuromancer</li>
                     <li>Snow Crash</li>
                     <li>Foundation</li>
@@ -87,11 +87,53 @@ export default function Lab1() {
                     <td>2/13/21</td>
                     <td>68</td> 
                     </tr>
+                    <tr>
+                    <td>Q4</td>
+                    <td>JavaScript</td>
+                    <td>2/20/21</td>
+                    <td>95</td> 
+                    </tr>
+                    <tr>
+                    <td>Q5</td>
+                    <td>React</td>
+                    <td>3/5/21</td>
+                    <td>87</td> 
+                    </tr>
+                    <tr>
+                    <td>Q6</td>
+                    <td>Node.js</td>
+                    <td>3/15/21</td>
+                    <td>92</td> 
+                    </tr>
+                    <tr>
+                    <td>Q7</td>
+                    <td>MongoDB</td>
+                    <td>3/25/21</td>
+                    <td>78</td> 
+                    </tr>
+                    <tr>
+                    <td>Q8</td>
+                    <td>TypeScript</td>
+                    <td>4/5/21</td>
+                    <td>89</td> 
+                    </tr>
+                    <tr>
+                    <td>Q9</td>
+                    <td>Redux</td>
+                    <td>4/15/21</td>
+                    <td>84</td> 
+                    </tr>
+                    <tr>
+                    <td>Q10</td>
+                    <td>NextJS</td>
+                    <td>4/25/21</td>
+                    <td>91</td> 
+                    </tr>
                     </tbody>
                     <tfoot>
                         <tr>
                         <td colSpan={3}>Average</td>
-                        <td>81</td>
+                        <td>86</td>
                         </tr>
                     </tfoot>
             </table>
@@ -103,7 +145,7 @@ export default function Lab1() {
             <br />
             Loading a local image:
             <br />
-            <img id="wd-teslabot" src="/teslabot.jpg" height="200px" alt="teslabot local image" />
+            <img id="wd-teslabot" src="/images/teslabot.jpg" height="200px" alt="teslabot local image" />
         </div>
         <div id="wd-forms">
             <h4>Form Elements</h4>
@@ -145,7 +187,19 @@ export default function Lab1() {
         >
         Hello World!
         </button>
-
+        
+        <br />
+        <br />
+        <br />
+        
+        <label htmlFor="wd-file-upload">Upload a file:</label>
+        <input 
+          type="file" 
+          id="wd-file-upload" 
+          name="wd-file-upload" 
+        />
+        <br />
+        <br />
 
 
         {/* ---------------- Radio Buttons ---------------- */}
@@ -246,7 +300,7 @@ export default function Lab1() {
         </a>{" "}
         to get dummy text <br />
         Visit{" "}
-        <a href="https://github.com/your-username/your-repo" id="wd-github">
+        <a href="https://github.com/bhanupragnyaneu/kambaz-next-js" id="wd-github">
         my GitHub repo
         </a>
         <br />
