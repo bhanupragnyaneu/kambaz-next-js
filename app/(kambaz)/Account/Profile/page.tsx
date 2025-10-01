@@ -1,19 +1,38 @@
 import Link from "next/link";
+import { FormControl } from "react-bootstrap";
 export default function Profile() {
   return (
     <div id="wd-profile-screen">
       <h3>Profile</h3>
-      <input type="text" defaultValue="alice" placeholder="username" className="wd-username"/><br/>
-      <input defaultValue="123"   placeholder="password" type="password"
-             className="wd-password" /><br/>
-      <input type="text" defaultValue="Alice" placeholder="First Name" id="wd-firstname" /><br/>
-      <input type="text" defaultValue="Wonderland" placeholder="Last Name" id="wd-lastname" /><br/>
-      <input defaultValue="2000-01-01" type="date" id="wd-dob" /><br/>
-      <input defaultValue="alice@wonderland" type="email" id="wd-email" /><br/>
-      <select defaultValue="FACULTY" id="wd-role">
-        <option value="USER">User</option>       <option value="ADMIN">Admin</option>
-        <option value="FACULTY">Faculty</option> <option value="STUDENT">Student</option>
-      </select><br/>
+      <FormControl id="wd-username"
+               placeholder="Alice"
+               className="mb-2"/><br />
+      <FormControl id="wd-password"
+               placeholder="password" type="password"
+               className="mb-2"/><br />
+      <FormControl id="wd-first-name"
+               placeholder="Mad"
+               className="mb-2"/><br />
+      <FormControl id="wd-last-name"
+               placeholder="Hatter"
+               className="mb-2"/><br />
+      <FormControl id="wd-dob"
+               placeholder="01/01/2000"
+               type="date"
+               className="mb-2"/><br />
+      <FormControl id="wd-email"
+               placeholder="Alice@wonderland.com"
+               type="email"
+               className="mb-2"/><br />
+      <FormControl id="wd-role"
+               as="select"
+               className="mb-2">
+        <option value="USER">User</option>
+        <option value="ADMIN">Admin</option>
+        <option value="FACULTY">Faculty</option>
+        <option value="STUDENT">Student</option>
+      </FormControl><br />
       <Link href="Signin" > Sign out </Link>
     </div>
-);}
+);
+}

@@ -1,0 +1,154 @@
+body   {
+  margin: 0;
+  padding: 0;
+}
+
+body * {
+  font-family: Arial,
+  Helvetica, sans-serif;
+}
+
+@media (min-width: 768px) {
+  #wd-kambaz .wd-main-content-offset {
+    padding-left: 140px !important;
+  }
+}
+
+.list-group.wd > .list-group-item.active {
+  color: black;
+  background-color: white;
+  border-left: 3px solid black !important;
+}
+
+
+body { margin: 0;  padding: 0; }
+body * { font-family:
+         Arial, Helvetica, 
+         sans-serif; }
+@media (min-width: 768px) {
+  #wd-kambaz .wd-main-content-offset {
+    padding-left: 140px !important;
+  }
+}
+
+.btn-secondary {
+  --bs-btn-color: #000 !important;
+  --bs-btn-bg: #c7cdd1 !important;
+  --bs-btn-border-color: #c7cdd1 !important;
+  --bs-btn-hover-color: #fff !important;
+}
+.bg-secondary {
+  --bs-secondary-rgb: 199, 205, 209;
+}
+.list-group-item {
+  --bs-list-group-border-color: gray;
+}
+.wd-lesson {
+  border-left: 3px solid green !important;
+}
+
+.wd-assignment-item {
+    border-left: 3px solid green !important;
+    border-top: 1px solid #dee2e6;
+    border-right: 1px solid #dee2e6;
+    border-bottom: 1px solid #dee2e6;
+  }
+  
+  .wd-assignment-item:hover {
+    background-color: #f8f9fa;
+  }
+  
+  .wd-assignment-header {
+    border-bottom: 1px solid #dee2e6;
+  }
+  
+  #wd-assignments .list-group,
+  #wd-assignments .list-group-item {
+    border-radius: 0 !important;
+  }
+  
+  .wd-assignment-group {
+    border: 1px solid #dee2e6;
+    margin-bottom: 1rem;
+  }
+
+
+  .wd-dashboard-course {
+    margin: 25px 2px 2px 2px;
+  }
+
+  .wd-assignment-percentage {
+    display: inline-block;
+    padding: 4px 12px;
+    border: 1px solid #6c757d;
+    border-radius: 20px;
+    background-color: #b8bec3;
+    font-size: 0.9em;
+    font-weight: normal;
+    margin-left: 8px;
+  }
+/* Form card */
+#wd-assignments-editor .col-md-8 {
+  background-color: #fff;
+  padding: 24px;
+}
+
+/* Section headers like "Submission Type", "Assign" */
+#wd-assignments-editor label.text-secondary {
+  font-weight: 600;
+}
+
+/* Description box */
+#wd-assignments-editor .bg-light {
+  background-color: #f9f9f9 !important;
+}
+
+/* Buttons */
+#wd-assignments-editor .btn-light {
+  border: 1px solid #dee2e6;
+}
+
+#wd-assignments-editor .btn-danger {
+  background-color: #d9534f;
+  border-color: #d43f3a;
+}
+
+#wd-signin-screen {
+  max-width: 400px;
+  margin: 80px auto 0 auto;
+  padding: 24px;
+  background-color: #fff;
+}
+
+#wd-signup-screen {
+  max-width: 400px;
+  margin: 80px auto 0 auto;
+  padding: 24px;
+  background-color: #fff;
+}
+
+#wd-profile-screen {
+  max-width: 400px;
+  margin: 40px auto 0 auto;
+  padding: 24px;
+  background-color: #fff;
+}
+
+
+
+.wd-account-navigation .list-group-item {
+  border: none;
+  background: none;
+  font-weight: 500;
+  padding: 6px 0;
+}
+
+.wd-account-navigation .list-group-item.active {
+  color: black;
+  font-weight: 600;
+  background-color: transparent !important;
+}
+
+#wd-account-navigation .list-group-item {
+  color: #e74c3c !important;
+}

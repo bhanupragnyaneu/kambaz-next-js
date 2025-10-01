@@ -1,22 +1,119 @@
+import React from "react";
+import { MdDoNotDisturbAlt, MdAnnouncement, MdNotificationsNone }
+  from "react-icons/md";
+import { FaCheckCircle, FaHome } from "react-icons/fa";
+import { BiImport } from "react-icons/bi";
+import { LiaFileImportSolid } from "react-icons/lia";
+import { IoBarChart, IoNewspaperOutline } from "react-icons/io5";
+import { BsGraphUp } from "react-icons/bs";
+import { Button } from "react-bootstrap";
+import { GrAnnounce } from "react-icons/gr";
+
 export default function CourseStatus() {
   return (
-    <div id="wd-course-status">
+    <div id="wd-course-status" style={{ width: "350px" }}>
       <h2>Course Status</h2>
-      <div className="wd-status-buttons" style={{ display: "flex", flexDirection: "column", gap: "5px" }}>
-        <div style={{ marginBottom: "5px" }}>
-          <button className="wd-button">Unpublish</button>
-          <button className="wd-button">Publish</button>
+
+      <div className="d-flex mb-2">
+        <div className="w-50 pe-1">
+          <div className="mb-1">
+            <Button
+              variant="secondary"
+              size="lg"
+              className="w-100 text-nowrap"
+            >
+              <MdDoNotDisturbAlt className="me-2 fs-5" />
+              Unpublish
+            </Button>
+          </div>
         </div>
-        
-        <button className="wd-button">Import Existing Content</button>
-        <button className="wd-button">Import from Commons</button>
-        <button className="wd-button">Choose Home Page</button>
-        <button className="wd-button">View Course Stream</button>
-        <button className="wd-button">New Announcement</button>
-        <button className="wd-button">New Analytics</button>
-        <button className="wd-button">View Course Notifications</button>
+
+        <div className="w-50">
+          <div className="mb-1">
+            <Button variant="success" size="lg" className="w-100">
+              <FaCheckCircle className="me-2 fs-5" />
+              Publish
+            </Button>
+          </div>
+        </div>
+      </div>
+
+      <div className="mb-1">
+        <Button
+          variant="secondary"
+          size="lg"
+          className="w-100 text-start"
+        >
+          <BiImport className="me-2 fs-5" />
+          Import Existing Content
+        </Button>
+      </div>
+
+      <div className="mb-1">
+        <Button
+          variant="secondary"
+          size="lg"
+          className="w-100 text-start"
+        >
+          <LiaFileImportSolid className="me-2 fs-5" />
+          Import from Commons
+        </Button>
+      </div>
+
+      <div className="mb-1">
+        <Button
+          variant="secondary"
+          size="lg"
+          className="w-100 text-start"
+        >
+          <FaHome className="me-2 fs-5" />
+          Choose Home Page
+        </Button>
+      </div>
+
+      <div className="mb-1">
+        <Button
+          variant="secondary"
+          size="lg"
+          className="w-100 text-start"
+        >
+          <IoBarChart className="me-2 fs-5" />
+          View Course Stream
+        </Button>
+      </div>
+
+      <div className="mb-1">
+        <Button
+          variant="secondary"
+          size="lg"
+          className="w-100 text-start"
+        >
+          <GrAnnounce className="me-2 fs-5" />
+          New Announcement
+        </Button>
+      </div>
+
+      <div className="mb-1">
+        <Button
+          variant="secondary"
+          size="lg"
+          className="w-100 text-start"
+        >
+          <BsGraphUp className="me-2 fs-5" />
+          New Analytics
+        </Button>
+      </div>
+
+      <div className="mb-1">
+        <Button
+          variant="secondary"
+          size="lg"
+          className="w-100 text-start"
+        >
+          <MdNotificationsNone className="me-2 fs-5" />
+          View Course Notifications
+        </Button>
       </div>
     </div>
   );
 }
-
