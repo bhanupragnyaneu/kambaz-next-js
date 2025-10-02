@@ -4,7 +4,7 @@ import Link from "next/link";
 import { useParams } from "next/navigation";
 import { Button, Form, ListGroup, ListGroupItem } from "react-bootstrap";
 import { BsGripVertical, BsPlus } from "react-icons/bs";
-import { FaCheckCircle, FaRegFileAlt, FaGripVertical, FaPlus, FaFileAlt } from "react-icons/fa";
+import { FaCheckCircle, FaRegFileAlt, FaGripVertical, FaPlus, FaFileAlt, FaSearch } from "react-icons/fa";
 import { IoChevronDown, IoEllipsisVertical } from "react-icons/io5";
 
 export default function Assignments() {
@@ -14,13 +14,17 @@ export default function Assignments() {
   return (
     <div id="wd-assignments">
       <div className="d-flex justify-content-between align-items-center mb-4">
-        <Form.Control
-          type="text"
-          placeholder="Search for Assignments"
-          id="wd-search-assignment"
-          className="me-2 fs-6"
-          style={{ maxWidth: "300px" }}
-        />
+        <div className="d-flex align-items-center text-secondary">
+          <div className="position-relative" style={{ maxWidth: "300px" }}>
+            <Form.Control
+              type="text"
+              placeholder="  Search..."
+              id="wd-search-assignment"
+              className="ps-4 fs-6"
+            />
+            <FaSearch className="position-absolute" style={{ left: "10px", top: "50%", transform: "translateY(-50%)" }} />
+          </div>
+        </div>
         <div>
           <Button variant="secondary" size="lg" className="me-2" id="wd-add-assignment-group">
             <BsPlus className="me-2 fs-2" />
