@@ -5,19 +5,24 @@ export default function Profile() {
     <div id="wd-profile-screen">
       <h3>Profile</h3>
       <FormControl id="wd-username"
-               placeholder="Alice"
+               placeholder="username"
+               defaultValue={"aliceJunk"}
                className="mb-2"/><br />
       <FormControl id="wd-password"
                placeholder="password" type="password"
+               defaultValue={"password"}
                className="mb-2"/><br />
       <FormControl id="wd-first-name"
-               placeholder="Mad"
+               placeholder="first-name"
+               defaultValue={"Mad"}
                className="mb-2"/><br />
       <FormControl id="wd-last-name"
-               placeholder="Hatter"
+               placeholder="last-name"
+               defaultValue={"Hatter"}
                className="mb-2"/><br />
       <FormControl id="wd-dob"
                placeholder="01/01/2000"
+               defaultValue={"2000-01-01"}
                type="date"
                className="mb-2"/><br />
       <FormControl id="wd-email"
