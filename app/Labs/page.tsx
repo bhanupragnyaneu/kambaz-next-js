@@ -23,7 +23,7 @@ export default function Labs() {
             Name: Bhanu Pragnya Ravikiran <br />
             Email: 05 | CRN: 19730 | Online  <br />
             <a href="/Account/Signin">kambaz</a><br />
-            <a href="https://github.com/bhanupragnyaneu/kambaz-next-js/tree/a2">My GitHub</a>
+            <a href="https://github.com/bhanupragnyaneu/kambaz-next-js/tree/a3">My GitHub</a>
         </div>
    </div>
 );}
