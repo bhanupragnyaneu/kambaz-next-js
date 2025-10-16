@@ -24,7 +24,7 @@ export default function TOC() {
      <NavItem>
      </NavItem>
      <NavItem>
-       <NavLink href="https://github.com/bhanupragnyaneu/kambaz-next-js/tree/a2">My GitHub</NavLink>
+       <NavLink href="https://github.com/bhanupragnyaneu/kambaz-next-js/tree/a3">My GitHub</NavLink>
      </NavItem>
    </Nav>
 );}
