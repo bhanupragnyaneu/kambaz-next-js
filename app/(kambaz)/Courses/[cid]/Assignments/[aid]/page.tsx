@@ -1,9 +1,15 @@
 "use client";
-import React from "react";
+import React, { use } from "react";
 import { Form, Button, Row, Col, InputGroup } from "react-bootstrap";
 import { FaCalendarAlt, FaTimes } from "react-icons/fa";
+import { assignments } from "../../../../Database";
+import { useParams } from "next/navigation";
+import Link from "next/link";
 
 export default function AssignmentEditor() {
+  const cid = useParams().cid;
+  const aid = useParams().aid;
+  const assignment = assignments.find((a) => a._id === aid);
   return (
     <div id="wd-assignments-editor" className="container my-4">
       <Row className="mb-3">
@@ -15,7 +21,12 @@ export default function AssignmentEditor() {
                 Assignment Name
               </Form.Label>
               <Col sm={9}>
-                <Form.Control type="text" defaultValue="A1 - ENV + HTML" />
+                <Form.Control
+                  type="text"
+                  defaultValue={
+                    assignment ? assignment.title : "Assignment Name"
+                  }
+                />
               </Col>
             </Form.Group>
 
@@ -50,12 +61,19 @@ export default function AssignmentEditor() {
                 Points
               </Form.Label>
               <Col sm={9}>
-                <Form.Control type="number" defaultValue={100} />
+                <Form.Control
+                  type="number"
+                  defaultValue={assignment ? assignment.points : 0}
+                />
               </Col>
             </Form.Group>
 
             {/* Assignment Group */}
-            <Form.Group as={Row} className="mb-3" controlId="wd-assignment-group">
+            <Form.Group
+              as={Row}
+              className="mb-3"
+              controlId="wd-assignment-group"
+            >
               <Form.Label column sm={3} className="text-end">
                 Assignment Group
               </Form.Label>
@@ -70,7 +88,11 @@ export default function AssignmentEditor() {
             </Form.Group>
 
             {/* Display Grade As */}
-            <Form.Group as={Row} className="mb-3" controlId="wd-display-grade-as">
+            <Form.Group
+              as={Row}
+              className="mb-3"
+              controlId="wd-display-grade-as"
+            >
               <Form.Label column sm={3} className="text-end">
                 Display Grade As
               </Form.Label>
@@ -83,26 +105,51 @@ export default function AssignmentEditor() {
             </Form.Group>
 
             {/* Submission Type */}
-            <Form.Group as={Row} className="mb-4" controlId="wd-submission-type">
+            <Form.Group
+              as={Row}
+              className="mb-4"
+              controlId="wd-submission-type"
+            >
               <Form.Label column sm={3} className="text-end">
                 Submission Type
               </Form.Label>
               <Col sm={9}>
                 <div className="border rounded">
-                  
-
                   {/* Online Entry Options */}
                   <div className="p-3">
                     <Form.Select className="border mb-3" defaultValue="Online">
-                    <option>Online</option>
-                    <option>Offline</option>
-                  </Form.Select>
-                    <Form.Label style={{ fontWeight: "bold" } }>Online Entry Options</Form.Label>
-                    <Form.Check type="checkbox" label="Text Entry" id="wd-text-entry" />
-                    <Form.Check type="checkbox" label="Website URL" id="wd-website-url" defaultChecked />
-                    <Form.Check type="checkbox" label="Media Recordings" id="wd-media-recordings" />
-                    <Form.Check type="checkbox" label="Student Annotation" id="wd-student-annotation" />
-                    <Form.Check type="checkbox" label="File Uploads" id="wd-file-upload" />
+                      <option>Online</option>
+                      <option>Offline</option>
+                    </Form.Select>
+                    <Form.Label style={{ fontWeight: "bold" }}>
+                      Online Entry Options
+                    </Form.Label>
+                    <Form.Check
+                      type="checkbox"
+                      label="Text Entry"
+                      id="wd-text-entry"
+                    />
+                    <Form.Check
+                      type="checkbox"
+                      label="Website URL"
+                      id="wd-website-url"
+                      defaultChecked
+                    />
+                    <Form.Check
+                      type="checkbox"
+                      label="Media Recordings"
+                      id="wd-media-recordings"
+                    />
+                    <Form.Check
+                      type="checkbox"
+                      label="Student Annotation"
+                      id="wd-student-annotation"
+                    />
+                    <Form.Check
+                      type="checkbox"
+                      label="File Uploads"
+                      id="wd-file-upload"
+                    />
                   </div>
                 </div>
               </Col>
@@ -117,10 +164,16 @@ export default function AssignmentEditor() {
                 <div className="border rounded p-3">
                   {/* Assign to */}
                   <Form.Group className="mb-3">
-                    <Form.Label style={{ fontWeight: "bold" }}>Assign to</Form.Label>
+                    <Form.Label style={{ fontWeight: "bold" }}>
+                      Assign to
+                    </Form.Label>
                     <div className="form-control d-flex align-items-center">
                       <span className="bg-light px-2 py-1 me-1 rounded d-inline-flex align-items-center">
-                        Everyone <FaTimes className="ms-2" style={{ cursor: "pointer" }} />
+                        Everyone{" "}
+                        <FaTimes
+                          className="ms-2"
+                          style={{ cursor: "pointer" }}
+                        />
                       </span>
                     </div>
                   </Form.Group>
@@ -129,7 +182,10 @@ export default function AssignmentEditor() {
                   <Form.Group className="mb-3">
                     <Form.Label style={{ fontWeight: "bold" }}>Due</Form.Label>
                     <InputGroup>
-                      <Form.Control type="text" defaultValue="May 13, 2024, 11:59 PM" />
+                      <Form.Control
+                        type="text"
+                        defaultValue={assignment ? assignment.due : ""}
+                      />
                       <Button variant="outline-secondary">
                         <FaCalendarAlt />
                       </Button>
@@ -140,9 +196,14 @@ export default function AssignmentEditor() {
                   <Row>
                     <Col>
                       <Form.Group>
-                        <Form.Label style={{ fontWeight: "bold" }}>Available from</Form.Label>
+                        <Form.Label style={{ fontWeight: "bold" }}>
+                          Available from
+                        </Form.Label>
                         <InputGroup>
-                          <Form.Control type="text" defaultValue="May 6, 2024, 1:20" />
+                          <Form.Control
+                            type="text"
+                            defaultValue={assignment ? assignment.until : ""}
+                          />
                           <Button variant="outline-secondary">
                             <FaCalendarAlt />
                           </Button>
@@ -151,9 +212,15 @@ export default function AssignmentEditor() {
                     </Col>
                     <Col>
                       <Form.Group>
-                        <Form.Label style={{ fontWeight: "bold" }}>Until</Form.Label>
+                        <Form.Label style={{ fontWeight: "bold" }}>
+                          Until
+                        </Form.Label>
                         <InputGroup>
-                          <Form.Control type="text" placeholder="Enter date" />
+                          <Form.Control
+                            type="text"
+                            placeholder="Enter date"
+                            defaultValue={assignment ? assignment.until : ""}
+                          />
                           <Button variant="outline-secondary">
                             <FaCalendarAlt />
                           </Button>
@@ -167,17 +234,23 @@ export default function AssignmentEditor() {
             <hr></hr>
             {/* Footer Buttons */}
             <div className="d-flex justify-content-end">
-              <Button variant="light">Cancel</Button>
-              <Button variant="danger" className="ms-2">Save</Button>
+              <Link href={`/Courses/${cid}/Assignments`}>
+                <Button variant="light">Cancel</Button>
+                <Button variant="danger" className="ms-2">
+                  Save
+                </Button>
+              </Link>
             </div>
-            
-      <br/>
-      <br/><br/>
+
+            <br />
+            <br />
+            <br />
           </Form>
         </Col>
       </Row>
-      <br/>
-      <br/><br/>
+      <br />
+      <br />
+      <br />
     </div>
   );
 }
