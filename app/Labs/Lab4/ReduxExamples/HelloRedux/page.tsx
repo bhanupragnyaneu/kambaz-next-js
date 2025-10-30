@@ -10,5 +10,6 @@ export default function HelloRedux() {
       <h4>{message}</h4> <hr />
     </div>
   );
+  
 }
 
