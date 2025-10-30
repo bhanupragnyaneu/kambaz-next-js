@@ -1,14 +1,18 @@
 import { IoEllipsisVertical } from "react-icons/io5"; // Used in LessonControlButtons [6]
+import { FaTrash } from "react-icons/fa";
+import { FaPencil } from "react-icons/fa6";
 import { BsPlus } from "react-icons/bs";             // The required additional icon [3]
 import GreenCheckmark from "./GreenCheckmark";       // Required status indicator [6]
 
-export default function ModuleControlButtons() {
+export default function ModuleControlButtons({ moduleId, deleteModule, editModule }: { moduleId: string; deleteModule: (moduleId: string) => void; editModule: (moduleId: string) => void; }) {
     
     return (
         // The 'float-end' class (a Bootstrap utility class) positions the controls to the right 
         // as demonstrated in the LessonControlButtons implementation [6].
-        <div className="float-end"> 
-            
+        <div className="float-end">
+          <FaPencil className="text-warning me-2 mb-1" onClick={() => editModule(moduleId)} />
+          <FaTrash className="text-danger me-2 mb-1" onClick={() => deleteModule(moduleId)} />
+
             {/* The GreenCheckmark component is included as a status indicator [6] */}
             <GreenCheckmark />
             

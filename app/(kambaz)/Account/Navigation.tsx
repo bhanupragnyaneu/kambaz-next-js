@@ -1,29 +1,19 @@
 "use client";
 import Link from "next/link";
-import { ListGroup } from "react-bootstrap";
-
+import { usePathname } from "next/navigation";
+import { Nav, NavItem, NavLink } from "react-bootstrap";
+import { useSelector } from "react-redux";
 export default function AccountNavigation() {
-  return (
-    <div id="wd-account-navigation">
-      <ListGroup className="rounded-0" style={{ width: 120 }}>
-        <ListGroup.Item className="border-0 border-start border-3 fs-5 border-dark text-black fw-semibold">
-          <Link href="/Account/Signin" className="text-decoration-none text-black">
-            Signin
-          </Link>
-        </ListGroup.Item>
+  const { currentUser } = useSelector((state: any) => state.accountReducer);
+  const links = currentUser ? ["Profile"] : ["Signin", "Signup"];
+ const pathname = usePathname();
+ return (
+   <Nav variant="pills">
+     {links.map((link) => (
+       <NavItem key={link}>
+         <NavLink as={Link} href={`/Account/${link}`}  active={pathname.endsWith(link.toLowerCase())}>
+           {link} </NavLink> </NavItem>
+     ))}
+   </Nav>
+);}
 
-        <ListGroup.Item className="border-0">
-          <Link href="/Account/Signup" className="text-decoration-none fs-5 text-danger">
-            Signup
-          </Link>
-        </ListGroup.Item>
-
-        <ListGroup.Item className="border-0">
-          <Link href="/Account/Profile" className="text-decoration-none fs-5 text-danger">
-            Profile
-          </Link>
-        </ListGroup.Item>
-      </ListGroup>
-    </div>
-  );
-}
