@@ -1,4 +1,4 @@
-
+"use client";
 import Add from "../../Lab3/Add";
 import AddRedux from "./AddRedux";
 import CounterRedux from "./CounterRedux";
