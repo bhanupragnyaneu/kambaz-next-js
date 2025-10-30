@@ -1,4 +1,5 @@
 "use client";
+export const dynamic = 'force-dynamic';
 import { createSlice } from "@reduxjs/toolkit";
 const initialState = {
   todos: [
