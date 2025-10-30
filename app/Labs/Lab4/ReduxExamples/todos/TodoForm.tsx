@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 "use client";
 import { ListGroupItem, Button, FormControl } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
