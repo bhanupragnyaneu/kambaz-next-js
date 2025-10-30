@@ -13,7 +13,7 @@ import PassingDataOnEvent from "./PassingDataOnEvent";
 import PassingFunctions from "./PassingFunctions";
 import ReduxExamples from "./ReduxExamples/page";
 import StringStateVariables from "./StringStateVariables";
-import store from "./store";
+import store from "./store/index";
 export default function Lab4() {
   function sayHello() {
     alert("Hello");
