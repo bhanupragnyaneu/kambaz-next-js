@@ -1,10 +1,9 @@
-"use client";
 /* eslint-disable @typescript-eslint/no-explicit-any */
-export const dynamic = 'force-dynamic';
+"use client";
 import { useSelector, useDispatch } from "react-redux";
 import { increment, decrement } from "./counterReducer";
 export default function CounterRedux() {
-  const { count } = useSelector((state: any) => state?.counterReducer?? {});
+  const { count } = useSelector((state: any) => state.counterReducer);
   const dispatch = useDispatch();
   return (
     <div id="wd-counter-redux">
@@ -16,4 +15,5 @@ export default function CounterRedux() {
               id="wd-counter-redux-decrement-click"> Decrement </button>
       <hr/>
     </div>
-);}
+  );
+}

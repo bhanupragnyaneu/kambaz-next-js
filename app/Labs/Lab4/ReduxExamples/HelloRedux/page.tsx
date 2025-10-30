@@ -1,16 +1,12 @@
-"use client";
-export const dynamic = 'force-dynamic';
 /* eslint-disable @typescript-eslint/no-explicit-any */
+"use client";
 import { useSelector, useDispatch } from "react-redux";
-
 export default function HelloRedux() {
-  const { message } = useSelector((state: any) => state?.helloReducer?? {} );
+  const { message } = useSelector((state: any) => state.helloReducer);
   return (
     <div id="wd-hello-redux">
       <h3>Hello Redux</h3>
       <h4>{message}</h4> <hr />
     </div>
   );
-
 }
-
