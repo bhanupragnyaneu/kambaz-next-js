@@ -9,11 +9,25 @@ export default function TodoForm() {
   const dispatch = useDispatch();
 
   return (
-    <ListGroupItem
-      className="rounded-3 border d-flex flex-column gap-2 p-3"
-      style={{ maxWidth: 680 }}
-    >
+    <ListGroupItem className="rounded-3 border d-flex flex-column gap-2 p-3">
       <div className="d-flex gap-2">
+        <FormControl
+          id="wd-todo-title"
+          value={todo.title ?? ""}
+          onChange={(e) =>
+            dispatch(setTodo({ ...todo, title: e.target.value }))
+          }
+          placeholder="Learn Mongo"
+          className="py-2 rounded-3"
+        />
+        <Button
+          id="wd-update-todo-click"
+          variant="warning"
+          onClick={() => dispatch(updateTodo(todo))}
+          className="px-4"
+        >
+          Update
+        </Button>
         <Button
           id="wd-add-todo-click"
           variant="success"
@@ -22,23 +36,7 @@ export default function TodoForm() {
         >
           Add
         </Button>
-        <Button
-          id="wd-update-todo-click"
-          variant="secondary"
-          onClick={() => dispatch(updateTodo(todo))}
-          className="px-4"
-        >
-          Update
-        </Button>
       </div>
-
-      <FormControl
-        id="wd-todo-title"
-        value={todo.title ?? ""}
-        onChange={(e) => dispatch(setTodo({ ...todo, title: e.target.value }))}
-        placeholder="Learn Mongo"
-        className="py-3 rounded-3"
-      />
     </ListGroupItem>
   );
 }

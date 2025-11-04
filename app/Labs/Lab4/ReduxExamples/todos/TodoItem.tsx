@@ -5,11 +5,14 @@ import { Button, ListGroupItem } from "react-bootstrap";
 export default function TodoItem({ todo }: { todo: { id: number; title: string } }) {
   const dispatch = useDispatch();
   return (
-    <ListGroupItem key={todo.id}>
-      <Button className="btn btn-danger mr-10" onClick={() => dispatch(deleteTodo(todo.id))}
-              id="wd-delete-todo-click"> Delete </Button>
-      <Button onClick={() => dispatch(setTodo(todo))}
-              id="wd-set-todo-click"> Edit </Button>
+    <ListGroupItem key={todo.id} className="d-flex justify-content-between align-items-center">
       {todo.title}
+      <div>
+        <Button className="me-2" onClick={() => dispatch(setTodo(todo))}
+              id="wd-set-todo-click"> Edit </Button>
+        <Button className="btn btn-danger" onClick={() => dispatch(deleteTodo(todo.id))}
+              id="wd-delete-todo-click"> Delete </Button>
+      </div>
+      
     </ListGroupItem>
 );}
