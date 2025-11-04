@@ -1,15 +1,74 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 "use client";
-import React, { use } from "react";
+import React, { use, useEffect, useState } from "react";
 import { Form, Button, Row, Col, InputGroup } from "react-bootstrap";
 import { FaCalendarAlt, FaTimes } from "react-icons/fa";
 import { assignments } from "../../../../Database";
-import { useParams } from "next/navigation";
+import { useParams, useRouter } from "next/navigation";
 import Link from "next/link";
+import { addAssignment, updateAssignment } from "../reducer";
+import { useDispatch, useSelector } from "react-redux";
 
 export default function AssignmentEditor() {
-  const cid = useParams().cid;
-  const aid = useParams().aid;
-  const assignment = assignments.find((a) => a._id === aid);
+  const { cid, aid } = useParams();
+  const router = useRouter();
+  const dispatch = useDispatch();
+  const { assignments } = useSelector((state: any) => state.assignmentsReducer || { assignments: [] });
+  
+  // Check if this is a new assignment or editing existing one
+  const isNewAssignment = aid === "new";
+  const existingAssignment = assignments.find((a: any) => a._id === aid);
+  
+  // State for the assignment form
+  const [assignment, setAssignment] = useState({
+    title: "",
+    description: "",
+    points: 100,
+    dueDate: "",
+    availableFromDate: "",
+    availableUntilDate: "",
+    course: cid,
+  });
+
+  // Populate form with existing assignment data when editing
+  useEffect(() => {
+    if (!isNewAssignment && existingAssignment) {
+      setAssignment({
+        title: existingAssignment.title || "",
+        description: existingAssignment.description || "",
+        points: existingAssignment.points || 100,
+        dueDate: existingAssignment.dueDate || existingAssignment.due || "",
+        availableFromDate: existingAssignment.availableFromDate || existingAssignment.available || "",
+        availableUntilDate: existingAssignment.availableUntilDate || existingAssignment.until || "",
+        course: cid as string,
+      });
+    }
+  }, [isNewAssignment, existingAssignment, cid]);
+
+  // Handle save - create new or update existing
+  const handleSave = () => {
+    if (!assignment.title.trim()) {
+      console.log(assignment);
+      alert("Assignment name is required");
+      return;
+    }
+
+    if (isNewAssignment) {
+      // Create new assignment
+      dispatch(addAssignment(assignment));
+    } else {
+      // Update existing assignment
+      dispatch(updateAssignment({ ...assignment, _id: aid }));
+    }
+    
+    // Navigate back to assignments list
+    router.push(`/Courses/${cid}/Assignments`);
+  };
+
+  // Handle cancel - navigate back without saving
+  const handleCancel = () => {
+    router.push(`/Courses/${cid}/Assignments`);
+  };
   return (
     <div id="wd-assignments-editor" className="container my-4">
       <Row className="mb-3">
@@ -23,9 +82,9 @@ export default function AssignmentEditor() {
               <Col sm={9}>
                 <Form.Control
                   type="text"
-                  defaultValue={
-                    assignment ? assignment.title : "Assignment Name"
-                  }
+                  value={assignment.title}
+                  onChange={(e) => setAssignment({ ...assignment, title: e.target.value })}
+                  placeholder="Assignment Name"
                 />
               </Col>
             </Form.Group>
@@ -184,7 +243,7 @@ export default function AssignmentEditor() {
                     <InputGroup>
                       <Form.Control
                         type="text"
-                        defaultValue={assignment ? assignment.due : ""}
+                        defaultValue={assignment ? assignment.dueDate : ""}
                       />
                       <Button variant="outline-secondary">
                         <FaCalendarAlt />
@@ -202,7 +261,7 @@ export default function AssignmentEditor() {
                         <InputGroup>
                           <Form.Control
                             type="text"
-                            defaultValue={assignment ? assignment.until : ""}
+                            defaultValue={assignment ? assignment.dueDate : ""}
                           />
                           <Button variant="outline-secondary">
                             <FaCalendarAlt />
@@ -219,7 +278,7 @@ export default function AssignmentEditor() {
                           <Form.Control
                             type="text"
                             placeholder="Enter date"
-                            defaultValue={assignment ? assignment.until : ""}
+                            defaultValue={assignment ? assignment.dueDate : ""}
                           />
                           <Button variant="outline-secondary">
                             <FaCalendarAlt />
@@ -236,7 +295,7 @@ export default function AssignmentEditor() {
             <div className="d-flex justify-content-end">
               <Link href={`/Courses/${cid}/Assignments`}>
                 <Button variant="light">Cancel</Button>
-                <Button variant="danger" className="ms-2">
+                <Button variant="danger" className="ms-2"  onClick={handleSave} >
                   Save
                 </Button>
               </Link>
