@@ -18,15 +18,19 @@ export default function AssignmentEditor() {
   // Check if this is a new assignment or editing existing one
   const isNewAssignment = aid === "new";
   const existingAssignment = assignments.find((a: any) => a._id === aid);
-  
+  const curdate = new Date().toISOString().split('T')[0];
   // State for the assignment form
   const [assignment, setAssignment] = useState({
     title: "",
     description: "",
     points: 100,
-    dueDate: "",
-    availableFromDate: "",
-    availableUntilDate: "",
+    group: "",
+    gradeAs: "",
+    subType: "",
+    AssignTo: "",
+    dueDate: curdate,
+    availableFromDate: curdate,
+    availableUntilDate: curdate,
     course: cid,
   });
 
@@ -37,9 +41,13 @@ export default function AssignmentEditor() {
         title: existingAssignment.title || "",
         description: existingAssignment.description || "",
         points: existingAssignment.points || 100,
-        dueDate: existingAssignment.dueDate || existingAssignment.due || "",
-        availableFromDate: existingAssignment.availableFromDate || existingAssignment.available || "",
-        availableUntilDate: existingAssignment.availableUntilDate || existingAssignment.until || "",
+        group: existingAssignment.group || "",
+        gradeAs: existingAssignment.gradeAs || "",
+        subType: existingAssignment.subType || "",
+        AssignTo: existingAssignment.AssignTo || "",
+        dueDate: existingAssignment.dueDate || existingAssignment.due || curdate,
+        availableFromDate: existingAssignment.availableFromDate || existingAssignment.available || curdate,
+        availableUntilDate: existingAssignment.availableUntilDate || existingAssignment.until || curdate,
         course: cid as string,
       });
     }
@@ -122,7 +130,8 @@ export default function AssignmentEditor() {
               <Col sm={9}>
                 <Form.Control
                   type="number"
-                  defaultValue={assignment ? assignment.points : 0}
+                  value={assignment ? assignment.points : 0}
+                  onChange={(e) => setAssignment({ ...assignment, points: parseInt(e.target.value) })}
                 />
               </Col>
             </Form.Group>
@@ -137,7 +146,10 @@ export default function AssignmentEditor() {
                 Assignment Group
               </Form.Label>
               <Col sm={9}>
-                <Form.Select defaultValue="Assignments">
+                <Form.Select defaultValue="Assignments"
+                  value={assignment ? assignment.group : ""}
+                  onChange={(e) => setAssignment({ ...assignment, group: e.target.value })}
+                >
                   <option value="Assignments">Assignments</option>
                   <option value="Group A">Group A</option>
                   <option value="Group B">Group B</option>
@@ -156,7 +168,9 @@ export default function AssignmentEditor() {
                 Display Grade As
               </Form.Label>
               <Col sm={9}>
-                <Form.Select defaultValue="Percentage">
+                <Form.Select defaultValue="Percentage"
+                value={assignment ? assignment.gradeAs : ""}
+                  onChange={(e) => setAssignment({ ...assignment, gradeAs: e.target.value })}>
                   <option value="Points">Points</option>
                   <option value="Percentage">Percentage</option>
                 </Form.Select>
@@ -176,7 +190,10 @@ export default function AssignmentEditor() {
                 <div className="border rounded">
                   {/* Online Entry Options */}
                   <div className="p-3">
-                    <Form.Select className="border mb-3" defaultValue="Online">
+                    <Form.Select className="border mb-3" defaultValue="Online"
+                    value={assignment ? assignment.subType : ""}
+                  onChange={(e) => setAssignment({ ...assignment, subType: e.target.value })}
+                    >
                       <option>Online</option>
                       <option>Offline</option>
                     </Form.Select>
@@ -260,8 +277,9 @@ export default function AssignmentEditor() {
                         </Form.Label>
                         <InputGroup>
                           <Form.Control
-                            type="text"
-                            defaultValue={assignment ? assignment.dueDate : ""}
+                            type="date"
+                            value={assignment.availableFromDate}
+                            onChange={(e) => setAssignment({ ...assignment, availableFromDate: e.target.value })}
                           />
                           <Button variant="outline-secondary">
                             <FaCalendarAlt />
@@ -276,9 +294,9 @@ export default function AssignmentEditor() {
                         </Form.Label>
                         <InputGroup>
                           <Form.Control
-                            type="text"
-                            placeholder="Enter date"
-                            defaultValue={assignment ? assignment.dueDate : ""}
+                            type="date"
+                            value={assignment.availableUntilDate}
+                            onChange={(e) => setAssignment({ ...assignment, availableUntilDate: e.target.value })}
                           />
                           <Button variant="outline-secondary">
                             <FaCalendarAlt />

@@ -1,285 +1,14 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-// /* eslint-disable @typescript-eslint/no-explicit-any */
-// // "use client";
-
-// // import { assignments } from "@/app/(kambaz)/Database";
-// // import Link from "next/link";
-// // import { useParams } from "next/navigation";
-// // import { Button, Form, ListGroup, ListGroupItem } from "react-bootstrap";
-// // import { BsGripVertical, BsPlus } from "react-icons/bs";
-// // import { FaCheckCircle, FaRegFileAlt, FaGripVertical, FaPlus, FaFileAlt, FaSearch } from "react-icons/fa";
-// // import { IoChevronDown, IoEllipsisVertical } from "react-icons/io5";
-
-// // export default function Assignments() {
-// //   const cid = useParams().cid;
-
-// //   return (
-// //     <div id="wd-assignments">
-// //       <div className="d-flex justify-content-between align-items-center mb-4">
-// //         <div className="d-flex align-items-center text-secondary">
-// //           <div className="position-relative" style={{ maxWidth: "300px" }}>
-// //             <Form.Control
-// //               type="text"
-// //               placeholder="  Search..."
-// //               id="wd-search-assignment"
-// //               className="ps-4 fs-6"
-// //             />
-// //             <FaSearch className="position-absolute" style={{ left: "10px", top: "50%", transform: "translateY(-50%)" }} />
-// //           </div>
-// //         </div>
-// //         <div>
-// //           <Button variant="secondary" size="lg" className="me-2" id="wd-add-assignment-group">
-// //             <BsPlus className="me-2 fs-2" />
-// //             Group
-// //           </Button>
-// //           <Button variant="danger" size="lg" id="wd-add-assignment">
-// //             <BsPlus className="me-2 fs-2" />
-// //             Assignment
-// //           </Button>
-// //         </div>
-// //       </div>
-
-// //       <ListGroup className="rounded-0">
-// //         <ListGroupItem className="wd-assignment-group p-0 mb-0 fs-5">
-// //           <div className="wd-assignment-header p-3 ps-2 bg-secondary d-flex justify-content-between align-items-center">
-// //             <div className="d-flex align-items-center">
-// //               <BsGripVertical className="me-2 fs-3" />
-// //               <IoChevronDown className="me-2" />
-// //               <span className="fw-bold">ASSIGNMENTS</span>
-// //             </div>
-// //             <div className="d-flex align-items-center">
-// //               <span className="wd-assignment-percentage me-3">40% of Total</span>
-// //               <BsPlus className="fs-2 me-2" />
-// //               <IoEllipsisVertical className="fs-4" />
-// //             </div>
-// //           </div>
-// //       <ListGroup className="rounded-0">
-// //         {assignments.
-// //             filter((assignment) => assignment.course === cid)
-// //             .map((assignment) => (
-// //               <ListGroupItem key={assignment._id} className="wd-assignment-item p-3 ps-1 d-flex align-items-start">
-// //                 <BsGripVertical className="me-2 fs-3 mt-1" />
-// //                 <FaFileAlt className="me-2 mt-1 text-success" />
-// //                 <div className="flex-grow-1"> 
-// //                   <Link href={`/Courses/${cid}/Assignments/${assignment._id}`} className="text-decoration-none">
-// //                     <strong className="text-dark">{assignment.title}</strong>
-// //                   </Link>
-// //                   <div className="text-muted small mt-1">
-// //                     <span className="text-danger">Multiple Modules</span>
-// //                     <span className="mx-1">|</span>
-// //                     <span><strong>Not available until</strong> {assignment.until?.toLocaleString()}</span>
-// //                     <span className="mx-1">|</span>
-// //                     <span><strong>Due</strong> {assignment.due?.toLocaleString()}</span>
-// //                     <span className="mx-1">|</span>
-// //                     <span>{assignment.points} pts</span>
-                    
-// //                   </div>
-                  
-// //                 </div>
-// //                  <div className="d-flex align-items-center">
-// //                 <FaCheckCircle className="text-success me-2" />
-// //                 <IoEllipsisVertical className="fs-4" />
-// //               </div>
-// //               </ListGroupItem>
-// //             ))
-// //         }
-// //       </ListGroup>
-// //       </ListGroupItem>
-// //       </ListGroup>
-      
-// //     </div>
-// //   );
-// // }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-// "use client";
-// import React from "react";
-// import { useSelector, useDispatch } from "react-redux";
-// import { useParams, useRouter } from "next/navigation";
-// import { Button, Form, FormControl, InputGroup } from "react-bootstrap";
-// import { FaSearch, FaPlus, FaEllipsisV, FaTrash, FaEdit } from "react-icons/fa";
-// import { deleteAssignment } from "./reducer";
-// import Link from "next/link";
-// import { BsPlus } from "react-icons/bs";
-
-
-// export default function Assignments() {
-//   const { cid } = useParams();
-//   const router = useRouter();
-//   const dispatch = useDispatch();
-//   const { assignments } = useSelector((state: any) => state.assignmentsReducer || { assignments: [] });
-//   const { currentUser } = useSelector((state: any) => state.accountReducer || { currentUser: null });
-  
-//   // Filter assignments for current course
-//   const courseAssignments = assignments.filter((assignment: any) => assignment.course === cid);
-  
-//   const isFaculty = currentUser?.role === "FACULTY";
-
-//   const handleDeleteAssignment = (assignmentId: string, assignmentTitle: string) => {
-//     if (window.confirm(`Are you sure you want to remove "${assignmentTitle}"?`)) {
-//       dispatch(deleteAssignment(assignmentId));
-//     }
-//   };
-
-
-//     // Add this function to handle navigation to new assignment
-//   const handleAddAssignment = () => {
-//     router.push(`/Courses/${cid}/Assignments/new`);
-//   };
-
-//   return (
-//     <div id="wd-assignments">
-//       {/* Search and Controls */}
-//       <div className="d-flex justify-content-between align-items-center mb-4">
-//          <div className="d-flex align-items-center text-secondary">
-//            <div className="position-relative" style={{ maxWidth: "300px" }}>
-//              <Form.Control
-//               type="text"
-//               placeholder="  Search..."
-//               id="wd-search-assignment"
-//               className="ps-4 fs-6"
-//             />
-//             <FaSearch className="position-absolute" style={{ left: "10px", top: "50%", transform: "translateY(-50%)" }} />
-//           </div>
-//         </div>
-//         <div>
-//           <Button variant="secondary" size="lg" className="me-2" id="wd-add-assignment-group">
-//             <BsPlus className="me-2 fs-2" />
-//             Group
-//           </Button>
-//           <Button onClick={handleAddAssignment}  variant="danger" size="lg" id="wd-add-assignment">
-//             <BsPlus className="me-2 fs-2" />
-//             Assignment
-//           </Button>
-//         </div>
-//       </div>
-
-//       {/* Assignments List */}
-//       <div className="border rounded">
-//         <div className="bg-light p-3 border-bottom d-flex justify-content-between align-items-center">
-//           <h5 className="mb-0">
-//             <FaEllipsisV className="me-2" />
-//             ASSIGNMENTS
-//           </h5>
-//           <div>
-//             <span className="text-muted me-3">
-//               {Math.round(courseAssignments.reduce((sum: number, a: any) => sum + (a.points || 0), 0))}% of Total
-//             </span>
-//             <FaPlus className="me-2" />
-//             <FaEllipsisV />
-//           </div>
-//         </div>
-
-//         {courseAssignments.length === 0 ? (
-//           <div className="p-4 text-center text-muted">
-//             No assignments found for this course.
-//           </div>
-//         ) : (
-//           courseAssignments.map((assignment: any) => (
-//             <div key={assignment._id} className="p-3 border-bottom d-flex justify-content-between align-items-start">
-//               <div className="d-flex align-items-start">
-//                 <FaEllipsisV className="me-3 text-muted mt-1" />
-//                 <div className="me-3">
-//                   <i className="fas fa-file-alt text-success fs-4"></i>
-//                 </div>
-//                 <div>
-//                   <Link 
-//                     href={`/Courses/${cid}/Assignments/${assignment._id}`}
-//                     className="text-decoration-none text-dark fw-bold"
-//                   >
-//                     {assignment.title}
-//                   </Link>
-//                   <div className="text-muted small">
-//                     <span className="text-danger">Multiple Modules</span> | 
-//                     <span className="ms-1">
-//                       <strong>Not available until</strong> {assignment.availableFromDate || assignment.available || "N/A"} |
-//                     </span>
-//                     <div>
-//                       <strong>Due</strong> {assignment.dueDate || assignment.due || "N/A"} | {assignment.points || 0} pts
-//                     </div>
-//                   </div>
-//                 </div>
-//               </div>
-              
-//               {isFaculty && (
-//                 <div className="d-flex align-items-center">
-//                   <Link href={`/Courses/${cid}/Assignments/${assignment._id}`}>
-//                     <Button variant="outline-secondary" size="sm" className="me-2">
-//                       <FaEdit />
-//                     </Button>
-//                   </Link>
-//                   <Button 
-//                     variant="outline-danger" 
-//                     size="sm"
-//                     onClick={() => handleDeleteAssignment(assignment._id, assignment.title)}
-//                   >
-//                     <FaTrash />
-//                   </Button>
-//                   <FaEllipsisV className="ms-2 text-muted" />
-//                 </div>
-//               )}
-//             </div>
-//           ))
-//         )}
-//       </div>
-//     </div>
-//   );
-// }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 "use client";
 import React from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { useParams, useRouter } from "next/navigation";
-import { Button, Form } from "react-bootstrap";
-import { FaSearch, FaPlus, FaEllipsisV, FaTrash, FaEdit } from "react-icons/fa";
+import { Button, Form, ListGroup, ListGroupItem } from "react-bootstrap";
+import { FaSearch, FaEllipsisV, FaTrash, FaEdit, FaCheckCircle, FaFileAlt } from "react-icons/fa";
 import { deleteAssignment } from "./reducer";
 import Link from "next/link";
-import { BsPlus } from "react-icons/bs";
+import { BsGripVertical, BsPlus } from "react-icons/bs";
+import { IoChevronDown, IoEllipsisVertical } from "react-icons/io5";
 
 export default function Assignments() {
   const { cid } = useParams();
@@ -307,7 +36,7 @@ export default function Assignments() {
   return (
     <div id="wd-assignments">
       {/* Search and Controls */}
-      <div className="d-flex justify-content-between align-items-center mb-4">
+       <div className="d-flex justify-content-between align-items-center mb-4">
          <div className="d-flex align-items-center text-secondary">
            <div className="position-relative" style={{ maxWidth: "300px" }}>
              <Form.Control
@@ -319,42 +48,37 @@ export default function Assignments() {
             <FaSearch className="position-absolute" style={{ left: "10px", top: "50%", transform: "translateY(-50%)" }} />
           </div>
         </div>
-        
-        {/* Only show buttons for faculty */}
-        
-          <div>
-            <Button variant="secondary" size="lg" className="me-2" id="wd-add-assignment-group">
-              <BsPlus className="me-2 fs-2" />
-              Group
-            </Button>
-            <Button 
-              variant="danger" 
-              size="lg" 
-              id="wd-add-assignment"
-              onClick={handleAddAssignment} // Add this onClick handler
-            >
-              <BsPlus className="me-2 fs-2" />
-              Assignment
-            </Button>
-          </div>
-        
+        <div>
+          <Button variant="secondary" size="lg" className="me-2" id="wd-add-assignment-group">
+            <BsPlus className="me-2 fs-2" />
+            Group
+          </Button>
+          <Button variant="danger" size="lg" id="wd-add-assignment" onClick={handleAddAssignment} >
+            <BsPlus className="me-2 fs-2" />
+            Assignment
+          </Button>
+        </div>
       </div>
+
+      <ListGroup className="rounded-0">
+        <ListGroupItem className="wd-assignment-group p-0 mb-0 fs-5">
+          <div className="wd-assignment-header p-3 ps-2 bg-secondary d-flex justify-content-between align-items-center">
+            <div className="d-flex align-items-center">
+              <BsGripVertical className="me-2 fs-3" />
+              <IoChevronDown className="me-2" />
+              <span className="fw-bold">ASSIGNMENTS</span>
+            </div>
+            <div className="d-flex align-items-center">
+              <span className="wd-assignment-percentage me-3">40% of Total</span>
+              <BsPlus className="fs-2 me-2" />
+              <IoEllipsisVertical className="fs-4" />
+            </div>
+          </div>
+          </ListGroupItem>
+      </ListGroup>
 
       {/* Assignments List */}
       <div className="border rounded">
-        <div className="bg-light p-3 border-bottom d-flex justify-content-between align-items-center">
-          <h5 className="mb-0">
-            <FaEllipsisV className="me-2" />
-            ASSIGNMENTS
-          </h5>
-          <div>
-            <span className="text-muted me-3">
-              40% of Total
-            </span>
-            <FaPlus className="me-2" />
-            <FaEllipsisV />
-          </div>
-        </div>
 
         {courseAssignments.length === 0 ? (
           <div className="p-4 text-center text-muted">
@@ -369,9 +93,10 @@ export default function Assignments() {
           </div>
         ) : (
           courseAssignments.map((assignment: any) => (
-            <div key={assignment._id} className="p-3 border-bottom d-flex justify-content-between align-items-start">
+            <div key={assignment._id} className="p-2 border-bottom d-flex wd-assignment-item justify-content-between align-items-start">
               <div className="d-flex align-items-start">
-                <FaEllipsisV className="me-3 text-muted mt-1" />
+                <BsGripVertical className="me-2 fs-3" />
+                <FaFileAlt className="me-2 mt-1 text-success" />
                 <div className="me-3">
                   <i className="fas fa-file-alt text-success fs-4"></i>
                 </div>
@@ -388,13 +113,13 @@ export default function Assignments() {
                       <strong>Not available until</strong> {assignment.availableFromDate || assignment.available || "N/A"} |
                     </span>
                     <div>
-                      <strong>Due</strong> {assignment.dueDate || assignment.due || "N/A"} | {assignment.points || 0} pts
+                      <strong>Due</strong> {assignment.availableUntilDate || assignment.due || "N/A"} | {assignment.points || 0} pts
                     </div>
                   </div>
                 </div>
               </div>
               
-              {isFaculty && (
+              
                 <div className="d-flex align-items-center">
                   <Link href={`/Courses/${cid}/Assignments/${assignment._id}`}>
                     <Button variant="outline-secondary" size="sm" className="me-2">
@@ -408,9 +133,10 @@ export default function Assignments() {
                   >
                     <FaTrash />
                   </Button>
+                  <FaCheckCircle className="ms-3 text-success me-2" />
                   <FaEllipsisV className="ms-2 text-muted" />
                 </div>
-              )}
+              
             </div>
           ))
         )}
