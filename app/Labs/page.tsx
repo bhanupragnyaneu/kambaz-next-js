@@ -21,6 +21,11 @@ export default function Labs() {
            Lab 4: Maintaining State in React Applications
           </Link>
        </li>
+       <li>
+          <Link href="http://localhost:4000/lab5/welcome" id="wd-lab5-link">
+           Lab 5: Maintaining State in React Applications
+          </Link>
+       </li>
       </ul>
      
         <div id="student-info">
