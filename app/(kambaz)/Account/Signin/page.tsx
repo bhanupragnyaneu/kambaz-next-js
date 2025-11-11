@@ -32,7 +32,7 @@ export default function Signin() {
       <FormControl defaultValue={credentials.password}
              onChange={(e) => setCredentials({ ...credentials, password: e.target.value })}
              className="mb-2" placeholder="password" type="password" id="wd-password" />
-      <Button onClick={Profile} id="wd-signin-btn" className="w-100" > Sign in </Button>
+      <Button onClick={signin} id="wd-signin-btn" className="w-100" > Sign in </Button>
       <Link id="wd-signup-link" href="/Account/Signup"> Sign up </Link>
     </div>
 );}
