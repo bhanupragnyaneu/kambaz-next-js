@@ -34,10 +34,8 @@ export default function Dashboard() {
     description: "New Description",
   });
 
-  // Toggle between showing all courses and only enrolled courses
   const [showAllCourses, setShowAllCourses] = useState(false);
 
-  // Check if user is enrolled in a course
   const isEnrolled = (courseId: string) => {
     return enrollments.some(
       (enrollment: any) =>
@@ -45,17 +43,14 @@ export default function Dashboard() {
     );
   };
 
-  // Handle enrollment
   const handleEnroll = (courseId: string) => {
     dispatch(enrollCourse({ userId: currentUser._id, courseId }));
   };
 
-  // Handle unenrollment
   const handleUnenroll = (courseId: string) => {
     dispatch(unenrollCourse({ userId: currentUser._id, courseId }));
   };
 
-  // Filter courses based on showAllCourses state
   const visibleCourses = showAllCourses
     ? courses
     : courses.filter((course: any) => isEnrolled(course._id));
@@ -66,7 +61,6 @@ export default function Dashboard() {
     <div id="wd-dashboard">
       <h1 id="wd-dashboard-title">Dashboard</h1> <hr />
       
-      {/* Faculty-only course management section */}
       {isFaculty && (
         <>
           <h5>
@@ -109,7 +103,6 @@ export default function Dashboard() {
         </>
       )}
 
-      {/* Dashboard header with Enrollments button */}
       <div className="d-flex justify-content-between align-items-center mb-3">
         <h2 id="wd-dashboard-published">
           {showAllCourses ? "All Courses" : "Published Courses"} (
@@ -125,7 +118,6 @@ export default function Dashboard() {
       </div>
       <hr />
 
-      {/* Course cards */}
       <div id="wd-dashboard-courses">
         <Row xs={1} md={5} className="g-4">
           {visibleCourses.map((course: any) => {
@@ -187,7 +179,6 @@ export default function Dashboard() {
                   )}
 
                   <CardBody className="pt-0">
-                    {/* Enrollment button */}
                     {enrolled ? (
                       <Button
                         variant="danger"
@@ -206,7 +197,6 @@ export default function Dashboard() {
                       </Button>
                     )}
 
-                    {/* Faculty-only edit/delete buttons */}
                     {isFaculty && enrolled && (
                       <div className="d-flex gap-2">
                         <button

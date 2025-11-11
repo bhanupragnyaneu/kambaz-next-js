@@ -11,12 +11,20 @@ const enrollmentsSlice = createSlice({
   initialState,
   reducers: {
     enrollCourse: (state, { payload: { userId, courseId } }) => {
-      const newEnrollment = {
-        _id: new Date().getTime().toString(),
-        user: userId,
-        course: courseId,
-      };
-      state.enrollments = [...state.enrollments, newEnrollment] as any;
+      const alreadyEnrolled = state.enrollments.some(
+        (enrollment: any) =>
+          enrollment.user === userId && enrollment.course === courseId
+      );
+
+      if (!alreadyEnrolled) {
+        const newEnrollment = {
+          _id: new Date().getTime().toString(),
+          user: userId,
+          course: courseId,
+          enrolledAt: new Date().toISOString(), 
+        };
+        state.enrollments = [...state.enrollments, newEnrollment] as any;
+      }
     },
     unenrollCourse: (state, { payload: { userId, courseId } }) => {
       state.enrollments = state.enrollments.filter(
