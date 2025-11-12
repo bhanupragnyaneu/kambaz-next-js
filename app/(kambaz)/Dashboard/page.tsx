@@ -2,7 +2,13 @@
 /* eslint-disable react/jsx-key */
 "use client";
 import { useDispatch, useSelector } from "react-redux";
-import { addNewCourse, deleteCourse, updateCourse } from "../Courses/reducer";
+import * as client from "../Courses/client";
+import {
+  addNewCourse,
+  deleteCourse,
+  updateCourse,
+  setCourses,
+} from "../Courses/reducer";
 import { enrollCourse, unenrollCourse } from "../Enrollments/reducer";
 import Link from "next/link";
 import {
@@ -16,14 +22,14 @@ import {
   FormControl,
   Row,
 } from "react-bootstrap";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 export default function Dashboard() {
   const { currentUser } = useSelector((state: any) => state.accountReducer);
   const { courses } = useSelector((state: any) => state.coursesReducer);
   const { enrollments } = useSelector((state: any) => state.enrollmentsReducer);
   const dispatch = useDispatch();
-  
+
   const [course, setCourse] = useState<any>({
     _id: "0",
     name: "New Course",
@@ -33,6 +39,47 @@ export default function Dashboard() {
     src: "/images/react.png",
     description: "New Description",
   });
+
+  const onAddNewCourse = async () => {
+    const newCourse = await client.createCourse(course);
+    dispatch(setCourses([...courses, newCourse]));
+  };
+
+  const onDeleteCourse = async (courseId: string) => {
+    const status = await client.deleteCourse(courseId);
+    dispatch(
+      setCourses(
+        courses.filter((course: { _id: string }) => course._id !== courseId)
+      )
+    );
+  };
+
+  const onUpdateCourse = async () => {
+    await client.updateCourse(course);
+    dispatch(
+      setCourses(
+        courses.map((c: { _id: any }) => {
+          if (c._id === course._id) {
+            return course;
+          } else {
+            return c;
+          }
+        })
+      )
+    );
+  };
+
+  const fetchCourses = async () => {
+    try {
+      const courses = await client.findMyCourses();
+      dispatch(setCourses(courses));
+    } catch (error) {
+      console.error(error);
+    }
+  };
+  useEffect(() => {
+    fetchCourses();
+  }, [currentUser]);
 
   const [showAllCourses, setShowAllCourses] = useState(false);
 
@@ -60,21 +107,20 @@ export default function Dashboard() {
   return (
     <div id="wd-dashboard">
       <h1 id="wd-dashboard-title">Dashboard</h1> <hr />
-      
       {isFaculty && (
         <>
           <h5>
             New Course
             <button
+              onClick={onAddNewCourse}
               className="btn btn-primary float-end"
               id="wd-add-new-course-click"
-              onClick={() => dispatch(addNewCourse(course))}
             >
               Add
             </button>
             <button
               className="btn btn-warning float-end me-2"
-              onClick={() => dispatch(updateCourse(course))}
+              onClick={onUpdateCourse} 
               id="wd-update-course-click"
             >
               Update
@@ -102,7 +148,6 @@ export default function Dashboard() {
           />
         </>
       )}
-
       <div className="d-flex justify-content-between align-items-center mb-3">
         <h2 id="wd-dashboard-published">
           {showAllCourses ? "All Courses" : "Published Courses"} (
@@ -117,12 +162,11 @@ export default function Dashboard() {
         </Button>
       </div>
       <hr />
-
       <div id="wd-dashboard-courses">
         <Row xs={1} md={5} className="g-4">
           {visibleCourses.map((course: any) => {
             const enrolled = isEnrolled(course._id);
-            
+
             return (
               <Col
                 key={course._id}
@@ -212,7 +256,7 @@ export default function Dashboard() {
                         <button
                           onClick={(event) => {
                             event.preventDefault();
-                            dispatch(deleteCourse(course._id));
+                            onDeleteCourse(course._id);
                           }}
                           className="btn btn-danger flex-fill"
                           id="wd-delete-course-click"

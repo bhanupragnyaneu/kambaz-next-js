@@ -1,5 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 "use client";
+import * as client from "../client";
 import { redirect } from "next/navigation";
 import { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
@@ -14,39 +15,54 @@ export default function Profile() {
    setProfile(currentUser);
  };
 
- const signout = () => {
+ 
+
+   const updateProfile = async () => {
+    const updatedProfile = await client.updateUser(profile);
+    dispatch(setCurrentUser(updatedProfile));
+  };
+
+ const signout = async () => {
+      await client.signout();
    dispatch(setCurrentUser(null));
    redirect("/Account/Signin");
  };
  useEffect(() => {
    fetchProfile();
- }, []);
+ }, [currentUser]);
  return (
    <div className="wd-profile-screen">
      <h3>Profile</h3>
      {profile && (
        <div>
+        <label htmlFor="wd-username"> Username </label>
          <FormControl id="wd-username" className="mb-2"
-           defaultValue={profile.username}
+           value={profile.username}
            onChange={(e) => setProfile({ ...profile, username: e.target.value }) }
          />
+          <label htmlFor="wd-password"> Password </label>
          <FormControl id="wd-password" className="mb-2"
-           defaultValue={profile.password}
+           value={profile.password}
            onChange={(e) => setProfile({ ...profile, password: e.target.value }) }
          />
+          <label htmlFor="wd-firstname"> First Name </label>
          <FormControl id="wd-firstname" className="mb-2"
-           defaultValue={profile.firstName}
+           value={profile.firstName}
            onChange={(e) => setProfile({ ...profile, firstName: e.target.value }) }
          />
+          <label htmlFor="wd-lastname"> Last Name </label>
          <FormControl id="wd-lastname" className="mb-2"
-           defaultValue={profile.lastName}
+           value={profile.lastName}
            onChange={(e) => setProfile({ ...profile, lastName: e.target.value }) } />
+         <label htmlFor="wd-dob"> Date of Birth </label>
          <FormControl id="wd-dob" className="mb-2" type="date"
-           defaultValue={profile.dob}
+           value={profile.dob}
            onChange={(e) => setProfile({ ...profile, dob: e.target.value })} />
+         <label htmlFor="wd-email"> Email </label>
          <FormControl id="wd-email" className="mb-2"
-           defaultValue={profile.email}
+           value={profile.email}
            onChange={(e) => setProfile({ ...profile, email: e.target.value })} />
+         <label htmlFor="wd-role"> Role </label>
          <select className="form-control mb-2" id="wd-role" 
            onChange={(e) => setProfile({ ...profile, role: e.target.value })} >
            <option value="USER">User</option>
@@ -54,6 +70,7 @@ export default function Profile() {
            <option value="FACULTY">Faculty</option>{" "}
            <option value="STUDENT">Student</option>
          </select>
+                   <button onClick={updateProfile} className="btn btn-primary w-100 mb-2"> Update </button>
          <Button onClick={signout} className="w-100 mb-2" id="wd-signout-btn">
            Sign out
          </Button>
