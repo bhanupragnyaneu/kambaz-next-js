@@ -22,6 +22,7 @@ export default function Modules() {
   
   const [moduleName, setModuleName] = useState("");
   const { modules } = useSelector((state: any) => state.modulesReducer);
+  const { currentUser } = useSelector((state: any) => state.accountReducer);
   const dispatch = useDispatch();
     const onCreateModuleForCourse = async () => {
     if (!cid) return;
@@ -58,6 +59,7 @@ export default function Modules() {
         setModuleName={setModuleName}
         moduleName={moduleName}
         addModule={onCreateModuleForCourse}
+        currentUser={currentUser}
       />
       <br />
       <br />

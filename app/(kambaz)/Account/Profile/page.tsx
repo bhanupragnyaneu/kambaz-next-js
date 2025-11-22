@@ -20,6 +20,7 @@ export default function Profile() {
    const updateProfile = async () => {
     const updatedProfile = await client.updateUser(profile);
     dispatch(setCurrentUser(updatedProfile));
+    alert("Profile updated successfully!");
   };
 
  const signout = async () => {
@@ -63,7 +64,7 @@ export default function Profile() {
            value={profile.email}
            onChange={(e) => setProfile({ ...profile, email: e.target.value })} />
          <label htmlFor="wd-role"> Role </label>
-         <select className="form-control mb-2" id="wd-role" 
+         <select className="form-control mb-2" id="wd-role" value={profile.role}
            onChange={(e) => setProfile({ ...profile, role: e.target.value })} >
            <option value="USER">User</option>
            <option value="ADMIN">Admin</option>

@@ -5,18 +5,20 @@ import ModuleEditor from "./ModuleEditor";
 
 import { CiNoWaitingSign } from "react-icons/ci";
 import { useState } from "react";
-export default function ModulesControls({ moduleName, setModuleName, addModule }: {
-  moduleName: string; setModuleName: (title: string) => void; addModule: () => void;
+export default function ModulesControls({ moduleName, setModuleName, addModule, currentUser }: {
+  moduleName: string; setModuleName: (title: string) => void; addModule: () => void; currentUser: any;
 }) {
   const [show, setShow] = useState(false);
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
   return (
     <div id="wd-modules-controls" className="text-nowrap">
-      <Button variant="danger" size="lg" className="me-1 float-end" id="wd-add-module-btn" onClick={handleShow}>
-        <FaPlus className="position-relative me-2" style={{ bottom: "1px" }} />
-        Module
-      </Button>
+      {currentUser?.role !== "STUDENT" && (
+        <Button variant="danger" size="lg" className="me-1 float-end" id="wd-add-module-btn" onClick={handleShow}>
+          <FaPlus className="position-relative me-2" style={{ bottom: "1px" }} />
+          Module
+        </Button>
+      )}
       <Dropdown className="float-end me-2">
        <DropdownToggle variant="secondary" size="lg" id="wd-publish-all-btn">
          <GreenCheckmark /> Publish All

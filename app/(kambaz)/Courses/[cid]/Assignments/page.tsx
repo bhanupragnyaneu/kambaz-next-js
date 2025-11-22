@@ -17,7 +17,6 @@ export default function Assignments() {
   const { assignments } = useSelector((state: any) => state.assignmentsReducer || { assignments: [] });
   const { currentUser } = useSelector((state: any) => state.accountReducer || { currentUser: null });
   
-  // Filter assignments for current course
   const courseAssignments = assignments.filter((assignment: any) => assignment.course === cid);
   
   const isFaculty = currentUser?.role === "FACULTY";
@@ -28,14 +27,12 @@ export default function Assignments() {
     }
   };
 
-  // Add this function to handle navigation to new assignment
   const handleAddAssignment = () => {
     router.push(`/Courses/${cid}/Assignments/new`);
   };
 
   return (
     <div id="wd-assignments">
-      {/* Search and Controls */}
        <div className="d-flex justify-content-between align-items-center mb-4">
          <div className="d-flex align-items-center text-secondary">
            <div className="position-relative" style={{ maxWidth: "300px" }}>
