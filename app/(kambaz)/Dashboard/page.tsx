@@ -74,9 +74,7 @@ export default function Dashboard() {
 
   const fetchCourses = async () => {
     try {
-      const courses = isFaculty
-        ? await client.fetchAllCourses()
-        : await client.findMyCourses();
+      const courses = await client.fetchAllCourses();
       dispatch(setCourses(courses));
     } catch (error) {
       console.error(error);
@@ -84,7 +82,7 @@ export default function Dashboard() {
   };
   useEffect(() => {
     fetchCourses();
-  }, [currentUser?.role]);
+  }, []);
 
   const isEnrolled = (courseId: string) => {
     return enrollments.some(
