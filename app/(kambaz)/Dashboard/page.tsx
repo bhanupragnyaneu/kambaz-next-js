@@ -69,9 +69,14 @@ export default function Dashboard() {
     );
   };
 
+  const isFaculty = currentUser?.role === "FACULTY";
+  const [showAllCourses, setShowAllCourses] = useState(isFaculty);
+
   const fetchCourses = async () => {
     try {
-      const courses = await client.findMyCourses();
+      const courses = isFaculty
+        ? await client.fetchAllCourses()
+        : await client.findMyCourses();
       dispatch(setCourses(courses));
     } catch (error) {
       console.error(error);
@@ -79,10 +84,7 @@ export default function Dashboard() {
   };
   useEffect(() => {
     fetchCourses();
-  }, [currentUser]);
-
-  const isFaculty = currentUser?.role === "FACULTY";
-  const [showAllCourses, setShowAllCourses] = useState(isFaculty);
+  }, [currentUser?.role]);
 
   const isEnrolled = (courseId: string) => {
     return enrollments.some(
