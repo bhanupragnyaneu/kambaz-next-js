@@ -253,7 +253,7 @@ export default function Dashboard() {
                   )}
 
                   <CardBody className="pt-0">
-                    {currentUser?.role !== "FACULTY" && (
+                    {currentUser?.role !== "FACULTY" && showAllCourses && (
                       <>
                         {enrolled ? (
                           <Button
