@@ -7,6 +7,7 @@ import { assignments } from "../../../../Database";
 import { useParams, useRouter } from "next/navigation";
 import Link from "next/link";
 import { addAssignment, updateAssignment } from "../reducer";
+import * as client from "../client";
 import { useDispatch, useSelector } from "react-redux";
 
 export default function AssignmentEditor() {
@@ -54,23 +55,30 @@ export default function AssignmentEditor() {
   }, [isNewAssignment, existingAssignment, cid]);
 
   // Handle save - create new or update existing
-  const handleSave = () => {
+  const handleSave = async () => {
     if (!assignment.title.trim()) {
       console.log(assignment);
       alert("Assignment name is required");
       return;
     }
 
-    if (isNewAssignment) {
-      // Create new assignment
-      dispatch(addAssignment(assignment));
-    } else {
-      // Update existing assignment
-      dispatch(updateAssignment({ ...assignment, _id: aid }));
+    try {
+      if (isNewAssignment) {
+        // Create new assignment
+        const newAssignment = await client.createAssignment(cid as string, assignment);
+        dispatch(addAssignment(newAssignment));
+      } else {
+        // Update existing assignment
+        const updatedAssignment = await client.updateAssignment(cid as string, { ...assignment, _id: aid });
+        dispatch(updateAssignment(updatedAssignment));
+      }
+      
+      // Navigate back to assignments list
+      router.push(`/Courses/${cid}/Assignments`);
+    } catch (error) {
+      console.error("Error saving assignment:", error);
+      alert("Failed to save assignment. Please try again.");
     }
-    
-    // Navigate back to assignments list
-    router.push(`/Courses/${cid}/Assignments`);
   };
 
   // Handle cancel - navigate back without saving

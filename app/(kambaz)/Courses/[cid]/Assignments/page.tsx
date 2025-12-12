@@ -1,11 +1,12 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 "use client";
-import React from "react";
+import React, { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { useParams, useRouter } from "next/navigation";
 import { Button, Form, ListGroup, ListGroupItem } from "react-bootstrap";
 import { FaSearch, FaEllipsisV, FaTrash, FaEdit, FaCheckCircle, FaFileAlt } from "react-icons/fa";
-import { deleteAssignment } from "./reducer";
+import { setAssignments, deleteAssignment } from "./reducer";
+import * as client from "./client";
 import Link from "next/link";
 import { BsGripVertical, BsPlus } from "react-icons/bs";
 import { IoChevronDown, IoEllipsisVertical } from "react-icons/io5";
@@ -21,9 +22,27 @@ export default function Assignments() {
   
   const isFaculty = currentUser?.role === "FACULTY";
 
-  const handleDeleteAssignment = (assignmentId: string, assignmentTitle: string) => {
+  const fetchAssignments = async () => {
+    try {
+      const assignments = await client.findAssignmentsForCourse(cid as string);
+      dispatch(setAssignments(assignments));
+    } catch (error) {
+      console.error("Error fetching assignments:", error);
+    }
+  };
+
+  useEffect(() => {
+    fetchAssignments();
+  }, [cid]);
+
+  const handleDeleteAssignment = async (assignmentId: string, assignmentTitle: string) => {
     if (window.confirm(`Are you sure you want to remove "${assignmentTitle}"?`)) {
-      dispatch(deleteAssignment(assignmentId));
+      try {
+        await client.deleteAssignment(cid as string, assignmentId);
+        dispatch(deleteAssignment(assignmentId));
+      } catch (error) {
+        console.error("Error deleting assignment:", error);
+      }
     }
   };
 

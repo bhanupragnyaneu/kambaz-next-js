@@ -9,7 +9,7 @@ import {
   updateCourse,
   setCourses,
 } from "../Courses/reducer";
-import { enrollCourse, unenrollCourse } from "../Enrollments/reducer";
+import { setEnrollments, enrollCourse, unenrollCourse } from "../Enrollments/reducer";
 import Link from "next/link";
 import {
   Button,
@@ -80,9 +80,27 @@ export default function Dashboard() {
       console.error(error);
     }
   };
+
+  const fetchEnrollments = async () => {
+    try {
+      if (currentUser) {
+        const userCourses = await client.findCoursesForUser(currentUser._id);
+        const enrollments = userCourses.map((course: any) => ({
+          _id: `${currentUser._id}-${course._id}`,
+          user: currentUser._id,
+          course: course._id,
+        }));
+        dispatch(setEnrollments(enrollments));
+      }
+    } catch (error) {
+      console.error("Error fetching enrollments:", error);
+    }
+  };
+
   useEffect(() => {
     fetchCourses();
-  }, []);
+    fetchEnrollments();
+  }, [currentUser]);
 
   const isEnrolled = (courseId: string) => {
     return enrollments.some(
@@ -91,12 +109,22 @@ export default function Dashboard() {
     );
   };
 
-  const handleEnroll = (courseId: string) => {
-    dispatch(enrollCourse({ userId: currentUser._id, courseId }));
+  const handleEnroll = async (courseId: string) => {
+    try {
+      await client.enrollIntoCourse(currentUser._id, courseId);
+      dispatch(enrollCourse({ userId: currentUser._id, courseId }));
+    } catch (error) {
+      console.error("Error enrolling in course:", error);
+    }
   };
 
-  const handleUnenroll = (courseId: string) => {
-    dispatch(unenrollCourse({ userId: currentUser._id, courseId }));
+  const handleUnenroll = async (courseId: string) => {
+    try {
+      await client.unenrollFromCourse(currentUser._id, courseId);
+      dispatch(unenrollCourse({ userId: currentUser._id, courseId }));
+    } catch (error) {
+      console.error("Error unenrolling from course:", error);
+    }
   };
 
   const visibleCourses = showAllCourses

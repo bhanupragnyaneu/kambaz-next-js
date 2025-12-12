@@ -32,16 +32,18 @@ export default function Modules() {
   };
 
     const onRemoveModule = async (moduleId: string) => {
-    await client.deleteModule(moduleId);
+    await client.deleteModule(cid as string,moduleId);
     dispatch(setModules(modules.filter((m: any) => m._id !== moduleId)));
   };
 
+ const onUpdateModule = async (module: any) => {
+   await client.updateModule(cid as string, module);
+   const newModules = modules.map((m: any) =>
+     m._id === module._id ? module : m
+   );
+   dispatch(setModules(newModules));
+ };
 
-    const onUpdateModule = async (module: any) => {
-    await client.updateModule(module);
-    const newModules = modules.map((m: any) => m._id === module._id ? module : m );
-    dispatch(setModules(newModules));
-  };
 
 
     const fetchModules = async () => {
@@ -66,7 +68,7 @@ export default function Modules() {
       <br />
       <br />
       <ListGroup id="wd-modules" className="rounded-0">
-        {modules
+        {Array.isArray(modules) && modules
           .map((module: any) => (
             <ListGroupItem className="wd-module p-0 mb-5 fs-5 border-gray">
               <div className="wd-title p-3 ps-2 bg-secondary">
