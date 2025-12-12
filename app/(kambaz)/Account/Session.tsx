@@ -9,14 +9,14 @@ export default function Session({ children }: { children: any }) {
   
   useEffect(() => {
     const fetchProfile = async () => {
-    try {
-      const currentUser = await client.profile();
-      dispatch(setCurrentUser(currentUser));
-    } catch (err: any) {
-      console.error(err);
-    }
-    setPending(false);
-  };
+      try {
+        const currentUser = await client.profile();
+        dispatch(setCurrentUser(currentUser));
+      } catch (err: any) {
+      } finally {
+        setPending(false);
+      }
+    };
     fetchProfile();
   }, [dispatch]);
   if (!pending) {
