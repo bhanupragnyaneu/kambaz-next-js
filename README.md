@@ -1,4 +1,4 @@
-<<<<<<< HEAD
+
 This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
 
 ## Getting Started
@@ -38,4 +38,3 @@ Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/bui
 =======
 # kambaz-next-js
 Fall 2025 CS2049 assignment repo (building canvas)
->>>>>>> 333b0a8ace84521b2fac0bd9f3faa286e5b13535
